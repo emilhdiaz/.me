@@ -20,3 +20,25 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
+# set PATH so it includes /usr/local bin if it exists
+if [ -d "/usr/local/bin" ] ; then
+    PATH="/usr/local/bin:$PATH"
+fi
+
+# set PATH so it includes /usr/local sbin if it exists
+if [ -d "/usr/local/sbin" ] ; then
+    PATH="/usr/local/sbin:$PATH"
+fi
+
+# set PATH so it includes /usr/local sbin if it exists
+if [ -d "/Applications/Android Studio.app/sdk/platform-tools" ] ; then
+    PATH="/Applications/Android Studio.app/sdk/platform-tools:$PATH"
+fi
+
+# set PATH so it includes android sdk tools
+if [ -d "/usr/local/android-sdk-macosx/tools" ] ; then
+    PATH="/usr/local/android-sdk-macosx/tools:$PATH"
+fi
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
