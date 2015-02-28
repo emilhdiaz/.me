@@ -52,8 +52,8 @@ alias ch='cd ~/Projects/coursehorse'
 alias cha='cd ~/Projects/coursehorse-api'
 alias chs='cd ~/Projects/coursehorse-solr'
 alias mz='cd ~/Projects/mozy'
-alias run='cd ~/Projects/mozy'
-
+alias run='cd ~/Projects/runner'
+alias aliases='open -a TextEdit ~/.me/.bash_aliases'
 
 # ======== Daemons ========
 alias php-fpm-stop='launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.php*.plist'
@@ -68,5 +68,5 @@ alias nginx-start='sudo launchctl load -w /Library/LaunchAgents/homebrew.mxcl.ng
 alias rmq-start='sudo rabbitmq-server start'
 alias rmq-stop='sudo rabbitmq-server stop'
 
-alias solr-start='cd ~/Projects/coursehorse-solr/bin && bash daemon.sh start'
-alias solr-stop='cd ~/Projects/coursehorse-solr/bin && bash daemon.sh stop'
+alias solr-start='cd ~/Projects/coursehorse-solr/bin && bash daemon.sh start ../config/cmd.cfg'
+alias solr-stop='cd ~/Projects/coursehorse-solr/bin && bash daemon.sh stop ../config/cmd.cfg'

@@ -31,14 +31,20 @@ if [ -d "/usr/local/sbin" ] ; then
     PATH="/usr/local/sbin:$PATH"
 fi
 
-# set PATH so it includes /usr/local sbin if it exists
-if [ -d "/Applications/Android Studio.app/sdk/platform-tools" ] ; then
-    PATH="/Applications/Android Studio.app/sdk/platform-tools:$PATH"
+# set PATH so it includes android sdk platform tools
+if [ -d "/usr/local/android-sdk-macosx/platform-tools" ] ; then
+    PATH="/usr/local/android-sdk-macosx/platform-tools:$PATH"
 fi
 
 # set PATH so it includes android sdk tools
 if [ -d "/usr/local/android-sdk-macosx/tools" ] ; then
     PATH="/usr/local/android-sdk-macosx/tools:$PATH"
+fi
+
+
+# set PATH so that it includes composer bin
+if [ -d "$HOME/.composer/vendor/bin" ] ; then
+    PATH="$HOME/.composer/vendor/bin:$PATH"
 fi
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
