@@ -1,0 +1,59 @@
+[user]
+	email = emil.h.diaz@gmail.com
+[core]
+	excludesfile = "$HOME/.gitignore_global"
+	editor = /usr/bin/vim
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[merge]
+	ff = false
+[push]
+	default = simple
+
+[alias]
+	graph = log --graph --oneline --decorate
+    	history = log --oneline --decorate
+    	ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    	ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+    	filelog = log -u
+    	fl = log -u
+    	dl = "!git ll -1"
+    	dlc = diff --cached HEAD^
+    	dr  = "!f() { git diff "$1"^.."$1"; }; f"
+    	lc  = "!f() { git ll "$1"^.."$1"; }; f"
+    	diffr  = "!f() { git diff "$1"^.."$1"; }; f"
+    	grep = grep -Ii
+    	gr = grep
+    	gri = grep -Ii
+    	gra = "!f() { A=$(pwd) && TOPLEVEL=$(git rev-parse --show-toplevel) && cd $TOPLEVEL && git grep --full-name -In $1 | xargs -I{} echo $TOPLEVEL/{} && cd $A; }; f"
+    	grf = "!git ls-files | grep -i"
+    	la = "!git config -l | grep alias | cut -c 7-"
+    	done = "!f() { git branch | grep "$1" | cut -c 3- | grep -v done | xargs -I{} git branch -m {} done-{}; }; f"
+    	lasttag = describe --tags --abbrev=@
+    	lt = describe --tags --abbrev=@
+    	cp = cherry-pick
+    	st = status -s
+    	cl = clone
+    	ci = commit
+    	co = checkout
+    	br = "!git branch | grep '*'"
+    	diff = diff --word-diff
+    	dc = diff --cached
+    	so = commit -s --allow-empty
+    	cqb = "!git diff --name-only --diff-filter=ACMRTUXB back | grep '.py' | pyflakes"
+    	rtag = "!git tag $(date \"+%Y%m%d%H%M%S\")_release"
+    	f = fetch --all --prune
+    	rb = rebase
+    	rbm = rebase origin/master
+	aside = stash save
+	grab = "!f() { git stash list | grep \"$1\" -m 1 | grep -Eow '^stash@{[0-9]+}' | xargs -n 1 git stash pop; }; f"
+	finda = "!grepalias() { git config --global --get-regexp alias | grep -i \"$1\" | awk -v nr=2 '{sub(/^alias\\./,\"\")};{printf \"\\033[31m%_10s\\033[1;37m\", $1};{sep=FS};{for (x=nr; x<=NF; x++) {printf \"%s%s\", sep, $x; }; print \"\\033[0;39m\"}'; }; grepalias"
+[branch]
+	autosetupmerge = always
+	autosetuprebase = always

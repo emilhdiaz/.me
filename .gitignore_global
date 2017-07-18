@@ -1,0 +1,10 @@
+# OS files
+*~
+.DS_Store
+
+# IDE configuration files
+.idea
+
+# Environment Configuration
+.envrc
+.python-version
