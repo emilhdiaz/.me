@@ -1,23 +1,32 @@
-# ======== General ========
-alias cl='clear'
+
+# ======== Permissions & Configuration ========
 alias _='sudo'
+alias a='open -a TextEdit ~/.me/.bash_aliases'
+alias rc='open -a TextEdit ~/.me/.bashrc'
+alias text='open -a TextEdit'
+
+# ======== Navigation ========
 alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
-alias ll='ls -laFh'
-alias l='ls -CF'
-alias fs='du -hc -d 1 | sort -nr'
-alias text='open -a TextEdit'
-alias a='open -a TextEdit ~/.me/.bash_aliases'
-
-# ======== Directory ========
+alias cl='clear'
+alias ls='ls -hCFG'
+alias ll='ls -alhFG'
 alias md='mkdir'
 alias rd='rm -rf'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias fs='du -hc -d 1 | sort -nr'
+alias p='cd ~/Projects'
 
-# ======== CPU ========
+# ======== Resource Management ========
 alias topC='top -o cpu' # cpu
 alias topM='top -o vsize' #memory
 alias top10='du -sx * | sort -rg | head -10'
+
+# Add an "alert" alias for long running commands.  Use like so $> sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # ======== Functions ========
 cgi() {
@@ -33,7 +42,7 @@ cgi() {
 }
 
 cloudsql() {
-  /Users/emil/cloud_sql_proxy -instances=chicory-$1:us-east1:chicory-$2=tcp:3308'
+  cloud_sql_proxy -instances=chicory-$1:us-east1:chicory-$2=tcp:3308
 }
 
 kill_all() {
@@ -65,10 +74,10 @@ quote() {
 }
 
 function pynew() {
-    mkdir -p "$1" && cd "$1" &&  # passing `-p` means it doesn't fail if the dir exists
+    mkdir -p "$1" && cd "$1" && 	# passing `-p` means it doesn't fail if the dir exists
     pyenv virtualenv "$2" "$1"-"$2" &&  # create the new virtualenv
-    pyenv local "$1"-"$2" &&  # set the new virtualenv to be the local Python version
-    pipup &&
-    [ -e "requirements.txt" ] &&  # check if requirements.txt exists...
-    pip install -r requirements.txt  # ...and if it does, install it
+    pyenv local "$1"-"$2" &&  		# set the new virtualenv to be the local Python version
+    pip install -U pip setuptools &&	# upgrade pip and setuptools
+    [ -e "requirements.txt" ] &&  	# check if requirements.txt exists...
+    pip install -r requirements.txt  	# ...and if it does, install it
 }
