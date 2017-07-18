@@ -41,10 +41,50 @@ if [ -d "/usr/local/android-sdk-macosx/tools" ] ; then
     PATH="/usr/local/android-sdk-macosx/tools:$PATH"
 fi
 
+# set PATH so that it includes Heroku Toolbelt
+if [ -d "/usr/local/heroku/bin" ] ; then
+    PATH="/usr/local/heroku/bin:$PATH"
+fi
 
 # set PATH so that it includes composer bin
 if [ -d "$HOME/.composer/vendor/bin" ] ; then
     PATH="$HOME/.composer/vendor/bin:$PATH"
 fi
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# set PATH so that it includes rvm bin
+if [ -d "$HOME/.rvm/bin" ] ; then
+    PATH="$HOME/.rvm/bin:$PATH"
+fi
+
+## Activate NVM
+if [ -d "/usr/local/opt/nvm" ] ; then
+    export NVM_DIR="/usr/local/opt/nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  			# This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"	# This loads nvm bash_completion
+fi
+
+## Activate PYENV
+if [ -e "/usr/local/bin/pyenv" ] ; then
+    eval "$(pyenv init -)"
+fi
+
+## Activate DIRENV
+if [ -e "/usr/local/bin/direnv" ] ; then
+    eval "$(direnv hook $0)"
+fi
+
+## Activate Google Cloud SDK
+if [ -f "$HOME/google-cloud-sdk/path.bash.inc" ]; then 
+    source "$HOME/google-cloud-sdk/path.bash.inc"; 
+fi
+
+## Activate gcloud CLI
+if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then 
+    source "$HOME/google-cloud-sdk/completion.bash.inc"; 
+fi
+
+export PATH=$PATH
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
+export EDITOR="/usr/bin/vi"
+export CHICORY_HOME="$HOME/Projects"
