@@ -95,3 +95,7 @@ esac
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+# allow locally installed npm binaries to be executed;
+# added by `npm i -g add-local-binaries-to-path`
+export PATH="$PATH:./node_modules/.bin"
