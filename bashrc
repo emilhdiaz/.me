@@ -92,19 +92,15 @@ esac
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [ -f ~/.me/bash_env ]; then
-    . ~/.me/bash_env
+if [ -f ~/.me/bash_aliases/common ]; then
+    . ~/.me/bash_aliases/common
 fi
 
-if [ -f ~/.me/bash_aliases ]; then
-    . ~/.me/bash_aliases
+if [ -f ~/.me/bash_aliases/aws ]; then
+    . ~/.me/bash_aliases/aws
 fi
 
-if [ -f ~/.me/bash_aws ]; then
-    . ~/.me/bash_aws
-fi
-
-if [ -f ~/.me/bash_reltio ]; then
-    . ~/.me/bash_reltio
+if [ -f ~/.me/bash_aliases/reltio ]; then
+    . ~/.me/bash_aliases/reltio
 fi
 

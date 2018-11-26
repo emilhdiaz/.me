@@ -57,10 +57,15 @@ if [ -d "$HOME/.rvm/bin" ] ; then
 fi
 
 ## Activate NVM
+##if [ -d "/Users/emil/.nvm" ] ; then
+##    export NVM_DIR="/Users/emil/.nvm"
+##    source "/usr/local/opt/nvm/nvm.sh"
+##fi
+
 if [ -d "/usr/local/opt/nvm" ] ; then
-    export NVM_DIR="/usr/local/opt/nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"  			# This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"	# This loads nvm bash_completion
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/usr/local/opt/nvm/nvm.sh" ] && source "/usr/local/opt/nvm/nvm.sh"  			# This loads nvm
+##    [ -s "/usr/local/etc/bash_completion.d" ] && source "/usr/local/etc/bash_completion.d"	# This loads nvm bash_completion
 fi
 
 ## Activate PYENV
@@ -87,4 +92,8 @@ export PATH=$PATH
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 export EDITOR="/usr/bin/vi"
-export CHICORY_HOME="$HOME/Projects"
+export PROJECT_DIR="$HOME/Projects"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export DOCKER_HOST=localhost:2375
+eval "$(direnv hook bash)"
