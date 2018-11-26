@@ -95,5 +95,6 @@ export EDITOR="/usr/bin/vi"
 export PROJECT_DIR="$HOME/Projects"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PATH:./node_modules/.bin"
 export DOCKER_HOST=localhost:2375
 eval "$(direnv hook bash)"

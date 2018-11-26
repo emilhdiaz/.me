@@ -103,4 +103,3 @@ fi
 if [ -f ~/.me/bash_aliases/reltio ]; then
     . ~/.me/bash_aliases/reltio
 fi
-
