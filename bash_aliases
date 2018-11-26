@@ -1,7 +1,6 @@
-
 # ======== Permissions & Configuration ========
 alias _='sudo'
-alias a='open -a TextEdit ~/.me/.bash_aliases'
+alias a='open -a TextEdit ~/.me/bash_aliases'
 alias rc='open -a TextEdit ~/.me/.bashrc'
 alias text='open -a TextEdit'
 
@@ -10,15 +9,25 @@ alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 alias cl='clear'
-alias ls='ls -hCFG'
-alias ll='ls -alhFG'
 alias md='mkdir'
 alias rd='rm -rf'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias fs='du -hc -d 1 | sort -nr'
-alias p='cd ~/Projects'
+alias p='cd $PROJECT_DIR'
+
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls -hCF --color=auto'
+    alias ll='ls -alhF --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+else 
+    alias ls='ls -hCFG'
+    alias ll='ls -alhFG'
+fi
+
 
 # ======== Resource Management ========
 alias topC='top -o cpu' # cpu
@@ -42,7 +51,7 @@ cgi() {
 }
 
 cloudsql() {
-  cloud_sql_proxy -instances=chicory-$1:us-east1:chicory-$2=tcp:3308
+  $HOME/cloud_sql_proxy -instances=$1:us-east1:$2=tcp:3308
 }
 
 kill_all() {
