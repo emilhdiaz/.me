@@ -1,0 +1,5 @@
+export PROJECT_DIR=~/Projects
+export DOCKER_HOST=localhost:2375
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(direnv hook bash)"
