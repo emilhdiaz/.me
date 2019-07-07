@@ -1,26 +1,24 @@
-function _aws_get_account() {
-  _PROFILE=${AWS_PROFILE}
-
+aws-get-account() {
   # Parse the environment variable into an associative array
   
-  declare -A _ACCOUNTS=();
-  IFS=';' read -a array <<< ${AWS_ACCOUNTS}
+  declare -A ACCOUNTS=();
+  a=("${(@s/;/)AWS_ACCOUNTS}")
 
-  for val in "${array[@]}"; do
+  for val in ${a}; do
     IFS='=' read profile account <<< ${val}
     #echo "${profile} => ${account}";
-    _ACCOUNTS["$profile"]="$account";
+    ACCOUNTS[$profile]="$account";
   done
 
   # Locate the account number for the given AWS profile
-  _ACCOUNT=${_ACCOUNTS["$_PROFILE"]}
+  ACCOUNT=${ACCOUNTS[$_PROFILE]}
 
   # If not found, query AWS caller identity
-  if [[ -z "${_ACCOUNT}" ]]; then
+  if [[ -z "${ACCOUNT}" ]]; then
 
-    #echo "Environment variable AWS_ACCOUNTS is not aware of this profile, looking up caller identity from AWS instead"
+    #echo "Environment variable AWS_ACCOUNTS is not aware of this profile, looking up caller identity from AWS instead" 1>&2
 
-    _ACCOUNT=$(AWS_PROFILE=${_PROFILE} aws sts get-caller-identity --output text --query 'Account' 2> /dev/null)
+    ACCOUNT=$(AWS_PROFILE=${AWS_PROFILE} aws sts get-caller-identity --output text --query 'Account' 2> /dev/null)
     success=$?
 
     if [[ "$success" -gt 0 ]]; then
@@ -29,59 +27,42 @@ function _aws_get_account() {
     fi
 
     # cache for later use
-    _ACCOUNTS["$_PROFILE"]=${_ACCOUNT}
-
+    ACCOUNTS[$_PROFILE]=${ACCOUNT}
+   
     # flatten into a string
     declare -a _AWS_ACCOUNTS=()
-    for profile in "${!_ACCOUNTS[@]}"; do
-      account=${_ACCOUNTS["$profile"]};
+    for profile account in ${(kv)ACCOUNTS}; do
       #echo "${profile} => ${account}";
       _AWS_ACCOUNTS+=("${profile}=${account}")
     done
 
     # export to external environment
-    export AWS_ACCOUNTS=$(IFS=';'; shift; echo "${_AWS_ACCOUNTS[*]}")
-    #echo AWS_ACCOUNTS = ${AWS_ACCOUNTS};
+    export AWS_ACCOUNTS=$(IFS=';'; echo "${_AWS_ACCOUNTS}")
+    #echo $AWS_ACCOUNTS
 
   fi
 
-  echo ${_ACCOUNTS["$_PROFILE"]}
+  echo ${ACCOUNTS[$_PROFILE]}
 }
 
-function aws-kubectl() {
-  _PROFILE=${AWS_PROFILE}
-  echo "Looking up AWS_ACCOUNT for AWS_PROFILE=${_PROFILE}"
+aws-kubectl() {
+  aws eks update-kubeconfig --name ${LABEL}
 
-  _ACCOUNT=$(_aws_get_account ${_PROFILE})
-  if [[ $? -ne 0 ]] || [[ -z "${_ACCOUNT}" ]]; then
-    (>&2 echo "An AWS_ACCOUNT for AWS_PROFILE=${_PROFILE} could not be found!")
+  if [[ $? -ne 0 ]]; then
+    (>&2 echo "Please make sure you've set the LABEL environment variable correctly!")
     return 1
   fi
 
-  echo "Using AWS_PROFILE=${_PROFILE}"
-  echo "Using AWS_ACCOUNT=${_ACCOUNT}"
-
-  _KUBECONFIG=~/.kube/abacus_${_ACCOUNT}_kubeconfig.yaml
-  echo "Using KUBECONFIG=${_KUBECONFIG}"
-
-  KUBECONFIG=${_KUBECONFIG} kubectl $@
+  kubectl $@
 }
 
-function aws-helm() {
-  _PROFILE=${AWS_PROFILE}
-  #echo "Looking up AWS ACCOUNT for PROFILE=${_PROFILE}"
+aws-helm() {
+  aws eks update-kubeconfig --name ${LABEL}
 
-  _ACCOUNT=$(_aws_get_account ${_PROFILE})
-  if [[ $? -ne 0 ]] || [[ -z "${_ACCOUNT}" ]]; then
-    (>&2 echo "An AWS account for PROFILE=${_PROFILE} could not be found!")
+  if [[ $? -ne 0 ]]; then
+    (>&2 echo "Please make sure you've set the LABEL environment variable correctly!")
     return 1
   fi
 
-  echo "Using AWS_PROFILE=${_PROFILE}"
-  echo "Using AWS_ACCOUNT=${_ACCOUNT}"
-
-  _KUBECONFIG=~/.kube/abacus_${_ACCOUNT}_kubeconfig.yaml
-  echo "Using KUBECONFIG=${_KUBECONFIG}"
-
-  KUBECONFIG=${_KUBECONFIG} helm $@
+  helm $@
 }

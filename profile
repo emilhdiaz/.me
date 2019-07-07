@@ -70,12 +70,14 @@ fi
 
 ## Activate PYENV
 if [ -e "/usr/local/bin/pyenv" ] ; then
-    eval "$(pyenv init -)"
+    eval "$(pyenv init -)";
+    eval "$(pyenv virtualenv-init -)";
 fi
 
 ## Activate DIRENV
 if [ -e "/usr/local/bin/direnv" ] ; then
-    eval "$(direnv hook $0)"
+    eval "$(direnv hook $SHELL)";
+    eval "$(direnv hook bash)";
 fi
 
 ## Activate Google Cloud SDK
@@ -87,14 +89,3 @@ fi
 if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then 
     source "$HOME/google-cloud-sdk/completion.bash.inc"; 
 fi
-
-export PATH=$PATH
-export CLICOLOR=1
-export LSCOLORS=ExFxBxDxCxegedabagacad
-export EDITOR="/usr/bin/vi"
-export PROJECT_DIR="$HOME/Projects"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="$PATH:./node_modules/.bin"
-export DOCKER_HOST=localhost:2375
-eval "$(direnv hook bash)"

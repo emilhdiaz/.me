@@ -1,0 +1,120 @@
+AWS_ROOT_PROFILE=${AWS_ROOT_PROFILE:-abacus}
+
+tf_workspace_select() {
+  ACCOUNT=$(aws-get-account ${_PROFILE})
+  if [[ $? -ne 0 ]] || [[ -z "${ACCOUNT}" ]]; then
+    (>&2 echo "An AWS account for AWS_PROFILE=${_PROFILE} could not be found!")
+    return 1
+  fi
+
+  if [[ -z "${LABEL}" ]]; then
+    (>&2 echo "Please make sure you've set the LABEL environment variable correctly!")
+    return 1
+  fi
+
+  AWS_PROFILE=${AWS_ROOT_PROFILE} terraform workspace select ${ACCOUNT}::${LABEL} #&> /dev/null
+
+  if [[ $? != 0 ]]; then
+    AWS_PROFILE=${AWS_ROOT_PROFILE} terraform workspace new ${ACCOUNT}::${LABEL}  #&> /dev/null;
+  fi
+
+  echo "Workspace ${ACCOUNT}::${LABEL} activated"
+}
+
+tf_update_all() {
+  DIR=$1 && shift
+  DEPTH=${2:-0}
+  find ${DIR}/* -maxdepth ${DEPTH} -type d ! -name . -exec bash -c "cd '{}' && pwd && AWS_PROFILE=${AWS_ROOT_PROFILE} terraform get -update" \; # 2> /dev/null;
+}
+
+tf_workspace() {
+  DIR=$1 && shift
+  (
+    cd ${DIR} && \
+    AWS_PROFILE=${AWS_ROOT_PROFILE} terraform workspace $@
+  )
+}
+
+tf_init() {
+  DIR=$1 && shift
+  (
+    cd ${DIR} && \
+    AWS_PROFILE=${AWS_ROOT_PROFILE} terraform init -get -backend-config ../../../vars/backend.tfvars "$@"
+  )
+}
+
+tf_update() {
+  DIR=$1 && shift
+  (
+    cd ${DIR} && \
+    AWS_PROFILE=${AWS_ROOT_PROFILE} terraform init -get -upgrade -backend-config ../../../vars/backend.tfvars "$@"
+  )
+}
+
+tf_plan() {
+  DIR=$1 && shift
+  (
+    cd ${DIR} && \
+    tf_workspace_select && \
+    AWS_PROFILE=${AWS_ROOT_PROFILE} terraform plan -var-file ../../../vars/backend.tfvars "$@"
+  )
+}
+
+tf_apply() {
+  DIR=$1 && shift
+  (
+    cd ${DIR} && \
+    tf_workspace_select && \
+    AWS_PROFILE=${AWS_ROOT_PROFILE} terraform apply -var-file ../../../vars/backend.tfvars "$@"
+  )
+}
+
+tf_destroy() {
+  DIR=$1 && shift
+  (
+    cd ${DIR} && \
+    tf_workspace_select && \
+    AWS_PROFILE=${AWS_ROOT_PROFILE} terraform destroy -var-file ../../../vars/backend.tfvars "$@"
+  )
+}
+
+tf_taint() {
+  DIR=$1 && shift
+  (
+    cd ${DIR} && \
+    tf_workspace_select && \
+    AWS_PROFILE=${AWS_ROOT_PROFILE} terraform taint -var-file ../../../vars/backend.tfvars "$@"
+  )
+}
+
+tf_output() {
+  DIR=$1 && shift
+  (
+    cd ${DIR} && \
+    tf_workspace_select && \
+    AWS_PROFILE=${AWS_ROOT_PROFILE} terraform output "$@"
+  )
+}
+
+function abacus-search()    {
+  find ${PROJECTDIR}/abacus/ -maxdepth 1 -type d ! -name . -exec bash -c "printf '\n\n{}'; grep -r -InH \
+  --exclude-dir=\.[a-zA-Z]* $1 \
+  '{}' | xargs -I % printf '\n\t--> %'" \; ; printf "\n\n" ;
+}
+
+sls-invoke() {
+  MODE=$1
+  FUNCTION=$2
+  NAMESPACE=$3
+  TYPE=$4
+  RESULT=$(USE_LOCAL_CONFIG=true sls invoke ${MODE} -f ${FUNCTION} -p tests/templates/${NAMESPACE}/${FUNCTION}${TYPE}.json)
+  echo $RESULT
+}
+
+function micropypi-start() {
+  docker run -d --rm -p 6421:6421 -v ~/.aws:/var/lib/pypicloud/.aws --name micropypi -e AWS_PROFILE=ai-devops-ops -e ARTIFACTS_BUCKET=abacus-artifacts-473376902650 473376902650.dkr.ecr.us-east-1.amazonaws.com/micropypi:latest
+}
+
+function micromaven-start() {
+  docker run -d --rm -p 6420:6420 -v ~/.aws:/root/.aws --name micromaven -e AWS_PROFILE=ai-devops-ops -e MICROMAVEN_STORAGE_URI=s3://abacus-artifacts-473376902650 micromaven:latest
+}

@@ -1,5 +1,6 @@
 [user]
 	email = emil.h.diaz@gmail.com
+	name = Emil Diaz
 [core]
 	excludesfile = "$HOME/.gitignore_global"
 	editor = /usr/bin/vim
@@ -7,7 +8,7 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [merge]
 	ff = false
@@ -43,7 +44,7 @@
     	ci = commit
     	co = checkout
     	br = "!git branch | grep '*'"
-    	diff = diff --word-diff
+    	diff = diff --word-diff --ignore-space-change
     	dc = diff --cached
     	so = commit -s --allow-empty
     	cqb = "!git diff --name-only --diff-filter=ACMRTUXB back | grep '.py' | pyflakes"
@@ -57,3 +58,5 @@
 [branch]
 	autosetupmerge = always
 	autosetuprebase = always
+[commit]
+	template = /Users/emil/.stCommitMsg

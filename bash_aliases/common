@@ -38,22 +38,6 @@ alias top10='du -sx * | sort -rg | head -10'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # ======== Functions ========
-cgi() {
-  DOCUMENT_ROOT=/Users/emil/Projects/coursehorse/public \
-  SCRIPT_NAME=/index.php \
-  SCRIPT_FILENAME=/Users/emil/Projects/coursehorse/public/index.php \
-  DOCUMENT_URI=/index.php \
-  REQUEST_URI=$1?XDEBUG_SESSION_START=$2 \
-  REQUEST_METHOD=GET \
-  QUERY_STRING=XDEBUG_SESSION_START=$2 \
-  HTTP_HOST=coursehorse.localhost \
-  cgi-fcgi -bind -connect /usr/local/var/run/php5-fpm.sock
-}
-
-cloudsql() {
-  $HOME/cloud_sql_proxy -instances=$1:us-east1:$2=tcp:3308
-}
-
 kill_all() {
   for pid in $(ps -ef | grep "$1" | awk '{print $2}'); do kill -9 $pid; done
 }
