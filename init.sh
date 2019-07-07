@@ -22,21 +22,44 @@ brew cask install \
   google-chrome \
   docker
 
-# install CLIs
+# install common CLIs
+brew install \
+  git \
+  direnv \
+  dos2unix \
+  jq
+
+# install Python development tools
+brew install \
+  python3 \
+  pyenv \
+  pyenv-virtualenv
+
+
+# install NodeJS development tools
+brew install \
+  node \
+  npm \
+  nvm
+
+# install PHP development tools
+brew install \
+  php \
+  composer
+
+# install Ruby development tools
+brew install \
+  ruby \
+  rvm
+
+# install common cloud/deployment tools
 brew install \
   awscli \
-  direnv \ 
-  dos2unix \ 
-  git \ 
-  jq \ 
-  node \ 
-  packer \ 
+  google-cloud-sdk \
+  packer \
   terraform \
   kubernetes-cli \
-  pyenv \ 
-  pyenv-virtualenv
-  python3
-
+  kubernetes-helm
 
 npm install -g \
   serverless

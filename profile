@@ -31,44 +31,24 @@ if [ -d "/usr/local/sbin" ] ; then
     PATH="/usr/local/sbin:$PATH"
 fi
 
-# set PATH so it includes android sdk platform tools
-if [ -d "/usr/local/android-sdk-macosx/platform-tools" ] ; then
-    PATH="/usr/local/android-sdk-macosx/platform-tools:$PATH"
-fi
-
-# set PATH so it includes android sdk tools
-if [ -d "/usr/local/android-sdk-macosx/tools" ] ; then
-    PATH="/usr/local/android-sdk-macosx/tools:$PATH"
-fi
-
-# set PATH so that it includes Heroku Toolbelt
-if [ -d "/usr/local/heroku/bin" ] ; then
-    PATH="/usr/local/heroku/bin:$PATH"
-fi
-
-# set PATH so that it includes composer bin
+## Activate (PHP) Composer
 if [ -d "$HOME/.composer/vendor/bin" ] ; then
     PATH="$HOME/.composer/vendor/bin:$PATH"
 fi
 
-# set PATH so that it includes rvm bin
+## Activate (Ruby) RVM
 if [ -d "$HOME/.rvm/bin" ] ; then
     PATH="$HOME/.rvm/bin:$PATH"
 fi
 
-## Activate NVM
-##if [ -d "/Users/emil/.nvm" ] ; then
-##    export NVM_DIR="/Users/emil/.nvm"
-##    source "/usr/local/opt/nvm/nvm.sh"
-##fi
-
+## Activate (NodeJS) NVM
 if [ -d "/usr/local/opt/nvm" ] ; then
     export NVM_DIR="$HOME/.nvm"
-    [ -s "/usr/local/opt/nvm/nvm.sh" ] && source "/usr/local/opt/nvm/nvm.sh"  			# This loads nvm
-##    [ -s "/usr/local/etc/bash_completion.d" ] && source "/usr/local/etc/bash_completion.d"	# This loads nvm bash_completion
+    [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+    [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 fi
 
-## Activate PYENV
+## Activate (Python) PYENV
 if [ -e "/usr/local/bin/pyenv" ] ; then
     eval "$(pyenv init -)";
     eval "$(pyenv virtualenv-init -)";
