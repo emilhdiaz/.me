@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 cd $HOME;
 ln -s $HOME/.me/profile .profile;
 ln -s $HOME/.me/bashrc .bashrc;
