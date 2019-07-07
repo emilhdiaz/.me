@@ -8,6 +8,11 @@ ln -s $HOME/.me/zshrc .zshrc;
 ln -s $HOME/.me/git/gitconfig .gitconfig;
 ln -s $HOME/.me/git/gitignore_global .gitignore_global;
 
+# install zsh
+# see: https://rick.cogley.info/post/use-homebrew-zsh-instead-of-the-osx-default/
+brew install zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 # install GUIs
 brew cask install \
   slack \
