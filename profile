@@ -61,11 +61,16 @@ if [ -e "/usr/local/bin/direnv" ] ; then
 fi
 
 ## Activate Google Cloud SDK
-if [ -f "$HOME/google-cloud-sdk/path.bash.inc" ]; then 
-    source "$HOME/google-cloud-sdk/path.bash.inc"; 
+if [ -f "$HOME/google-cloud-sdk/path.bash.inc" ]; then
+    source "$HOME/google-cloud-sdk/path.bash.inc";
 fi
 
 ## Activate gcloud CLI
-if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then 
-    source "$HOME/google-cloud-sdk/completion.bash.inc"; 
+if [ -f "$HOME/google-cloud-sdk/completion.bash.inc" ]; then
+    source "$HOME/google-cloud-sdk/completion.bash.inc";
+fi
+
+## Activate Hyper Ledger Fabric examples
+if [ -d "$HOME/Projects/fabric-samples/bin" ] ; then
+    PATH="$HOME/Projects/fabric-samples/bin:$PATH"
 fi
