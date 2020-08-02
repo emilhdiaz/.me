@@ -88,18 +88,12 @@ xterm*|rxvt*)
     ;;
 esac
 
-# ======== Environment Variables ========
-if [ -f ~/.me/env ]; then
-    . ~/.me/env
-fi
+# ======== Common Shell RC ========
 
-# ======== Aliases ========
-# You may want to put all your additions into separate files in the
-# ./bash_aliases directtory, instead of adding them here directly.
+# You may want to put all your additions into separate files
+# in a separate file, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -d ~/.me/bash_aliases ]; then
-    for f in ~/.me/bash_aliases/*; do
-        source $f;
-    done
+if [ -f ~/.me/rc ]; then
+    . ~/.me/rc
 fi

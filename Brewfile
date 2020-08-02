@@ -2,41 +2,25 @@
 # see: https://rick.cogley.info/post/use-homebrew-zsh-instead-of-the-osx-default/
 brew "zsh"
 brew "git"
-brew "direnv"
+brew "direnv"           # alternative: asdf-direnv
 brew "dos2unix"
-brew "jq"
+brew "jq"               # alternative: asdf-jq
+brew "unzip"
+brew "coreutils"
+brew "gpg"
 
-# install Python development tools
-brew "python3"
-brew "pyenv"
-brew "pyenv-virtualenv"
-
-
-# install NodeJS development tools
-brew "node"
-brew "npm"
-brew "nvm"
-
-# install PHP development tools
-brew "php"
-brew "composer"
-
-# install GoLang development tools
-brew "go"
-
-# install Ruby development tools
-brew "ruby"
+# install asdf
+brew "asdf"
 
 # install common cloud/deployment tools
 brew "awscli"
-brew "packer"
-brew "terraform"
-brew "kubernetes-cli"
-brew "kubernetes-helm"
+brew "packer"           # alternative: asdf-packer
+brew "terraform"        # alternative: asdf-terraform
+brew "kubernetes-cli"   # alternative: asdf-kubectl
+brew "kubernetes-helm"  # alternative: asdf-helm
 
 # install GUIs
-cask "spectacle"
-cask "google-cloud-sdk"
+#cask "spectacle"
 #cask "google-chrome"
 #cask "intellij-idea"
 #cask "postman"

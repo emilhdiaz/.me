@@ -4,6 +4,12 @@ git-check() {
   find ${DIR}/* -maxdepth ${DEPTH} -type d ! -name . -exec bash -c "cd '{}' && pwd && git st" \; 2> /dev/null;
 }
 
+git-check-tracked() {
+  DIR=$1
+  DEPTH=${2:-0}
+  find ${DIR}/* -maxdepth ${DEPTH} -type d ! -name . -exec bash -c "cd '{}' && pwd && git st --untracked-file=no" \; 2> /dev/null;
+}
+
 git-branch() {
   DIR=$1
   DEPTH=${2:-0}
