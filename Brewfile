@@ -21,6 +21,9 @@ brew "nvm"
 brew "php"
 brew "composer"
 
+# install GoLang development tools
+brew "go"
+
 # install Ruby development tools
 brew "ruby"
 
