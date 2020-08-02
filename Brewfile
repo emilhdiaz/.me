@@ -8,6 +8,7 @@ brew "jq"               # alternative: asdf-jq
 brew "unzip"
 brew "coreutils"
 brew "gpg"
+brew "bison"
 
 # install asdf
 brew "asdf"
@@ -16,8 +17,8 @@ brew "asdf"
 brew "awscli"
 brew "packer"           # alternative: asdf-packer
 brew "terraform"        # alternative: asdf-terraform
-brew "kubernetes-cli"   # alternative: asdf-kubectl
-brew "kubernetes-helm"  # alternative: asdf-helm
+brew "kubectl"          # alternative: asdf-kubectl
+brew "helm"             # alternative: asdf-helm
 
 # install GUIs
 #cask "spectacle"
