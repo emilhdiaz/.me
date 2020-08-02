@@ -5,6 +5,7 @@ if type "asdf" > /dev/null; then
   if [ -n "$INSTALL" ]; then
     asdf plugin add nodejs
     asdf install nodejs "${NODE_INSTALL_VERSION:-latest}"
+    bash -c '${ASDF_DATA_DIR:=$HOME/.asdf}/plugins/nodejs/bin/import-release-team-keyring'
     VERSION=$(asdf shim-versions node | head -n 1 | awk '{print $2}')
     asdf global nodejs "${VERSION}"
   fi
