@@ -1,0 +1,59 @@
+# ======== Environment Variables ========
+
+# You may want to put all your additions into separate files
+# in a separate file, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -d ~/.me/env ]; then
+    for f in ~/.me/env/*; do
+        source $f;
+    done
+fi
+
+# ======== Aliases ========
+
+# You may want to put all your additions into separate files
+# in a separate file, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -d ~/.me/bash_aliases ]; then
+    for f in ~/.me/bash_aliases/*; do
+        source $f;
+    done
+fi
+
+# ======== Adjust PATH ========
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# set PATH so it includes /usr/local bin if it exists
+if [ -d "/usr/local/bin" ] ; then
+    PATH="/usr/local/bin:$PATH"
+fi
+
+# set PATH so it includes /usr/local sbin if it exists
+if [ -d "/usr/local/sbin" ] ; then
+    PATH="/usr/local/sbin:$PATH"
+fi
+
+export PATH=$PATH
+
+# ======== Init Programs ========
+
+# You may want to put all your additions into separate files
+# in a separate file, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -d ~/.me/programs ]; then
+    for f in ~/.me/programs/*; do
+        source $f;
+    done
+fi
+
+

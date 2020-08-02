@@ -11,7 +11,7 @@ aws-get-account() {
   done
 
   # Locate the account number for the given AWS profile
-  ACCOUNT=${ACCOUNTS[$_PROFILE]}
+  ACCOUNT=${ACCOUNTS[$AWS_PROFILE]}
 
   # If not found, query AWS caller identity
   if [[ -z "${ACCOUNT}" ]]; then
@@ -27,7 +27,7 @@ aws-get-account() {
     fi
 
     # cache for later use
-    ACCOUNTS[$_PROFILE]=${ACCOUNT}
+    ACCOUNTS[$AWS_PROFILE]=${ACCOUNT}
    
     # flatten into a string
     declare -a _AWS_ACCOUNTS=()
@@ -36,13 +36,16 @@ aws-get-account() {
       _AWS_ACCOUNTS+=("${profile}=${account}")
     done
 
+    #echo ${ACCOUNTS[$AWS_PROFILE]}
+    #echo $(IFS=';'; echo "${_AWS_ACCOUNTS}")
+
     # export to external environment
     export AWS_ACCOUNTS=$(IFS=';'; echo "${_AWS_ACCOUNTS}")
     #echo $AWS_ACCOUNTS
 
   fi
 
-  echo ${ACCOUNTS[$_PROFILE]}
+  echo ${ACCOUNTS[$AWS_PROFILE]}
 }
 
 aws-kubectl() {

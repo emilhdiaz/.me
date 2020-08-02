@@ -76,7 +76,13 @@ function pynew() {
     mkdir -p "$1" && cd "$1" && 	# passing `-p` means it doesn't fail if the dir exists
     pyenv virtualenv "$2" "$1"-"$2" &&  # create the new virtualenv
     pyenv local "$1"-"$2" &&  		# set the new virtualenv to be the local Python version
-    pip install -U pip setuptools &&	# upgrade pip and setuptools
+    pip3 install -U pip setuptools &&	# upgrade pip and setuptools
     [ -e "requirements.txt" ] &&  	# check if requirements.txt exists...
-    pip install -r requirements.txt  	# ...and if it does, install it
+    pip3 install -r requirements.txt  	# ...and if it does, install it
+}
+
+
+function k8s-dashboard() {
+  aws-iam-authenticator token -i $LABEL | jq -r .status.token | pbcopy
+  kubectl proxy
 }
