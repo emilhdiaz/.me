@@ -1,4 +1,5 @@
 INSTALL=$1
+SHELL_NAME="$(basename "$SHELL")"
 
 # install via asdf
 if type "asdf" > /dev/null; then
@@ -12,10 +13,13 @@ if type "asdf" > /dev/null; then
 # install via homebrew
 else
   [ -n "$INSTALL" ] && brew install go
+  INSTALL_DIR="$(brew --prefix golang)"
 
-  export GOPATH="${HOME}/.go"
-  export GOROOT="$(brew --prefix golang)/libexec"
-  export PATH="${GOPATH}/bin:${GOROOT}/bin:$PATH"
+  if [ -d "$INSTALL_DIR" ]; then
+    export GOPATH="${HOME}/.go"
+    export GOROOT="$INSTALL_DIR/libexec"
+    export PATH="${GOPATH}/bin:${GOROOT}/bin:$PATH"
+  fi
 fi
 
 # install plugins

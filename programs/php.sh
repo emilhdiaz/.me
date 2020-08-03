@@ -1,4 +1,5 @@
 INSTALL=$1
+SHELL_NAME="$(basename "$SHELL")"
 
 # install via asdf
 if type "asdf" > /dev/null; then

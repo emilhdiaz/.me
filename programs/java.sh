@@ -1,4 +1,5 @@
 INSTALL=$1
+SHELL_NAME="$(basename "$SHELL")"
 
 # install via asdf
 if type "asdf" > /dev/null; then
@@ -9,14 +10,11 @@ if type "asdf" > /dev/null; then
     asdf global java "${VERSION}"
   fi
 
+  source "$HOME/.asdf/plugins/java/set-java-home.$SHELL_NAME"
+
 # install via homebrew
 else
   [ -n "$INSTALL" ] && brew cask install "java"
 
   export JAVA_HOME="$(/usr/libexec/java_home -V)"
 fi
-
-## Activate JAVA version
-#if [ -f "$HOME/.asdf/plugins/java/set-java-home.zsh" ]; then
-#    source "$HOME/.asdf/plugins/java/set-java-home.zsh"
-#fi

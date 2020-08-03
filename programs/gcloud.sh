@@ -1,4 +1,5 @@
 INSTALL=$1
+SHELL_NAME="$(basename "$SHELL")"
 
 # install via asdf
 if type "asdf" > /dev/null; then
@@ -12,15 +13,11 @@ if type "asdf" > /dev/null; then
 # install via homebrew
 else
   [ -n "$INSTALL" ] && brew cask install "google-cloud-sdk"
+  INSTALL_DIR="$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
 
-  if [ -n "$BASH_VERSION" ]; then
-     source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
-     source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
-  fi
-
-  if [ -n "$ZSH_VERSION" ]; then
-    source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-    source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+  if [ -d "$INSTALL_DIR" ]; then
+     source "$INSTALL_DIR/path.$SHELL_NAME.inc"
+     source "$INSTALL_DIR/completion.$SHELL_NAME.inc"
   fi
 fi
 

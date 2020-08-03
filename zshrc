@@ -99,3 +99,5 @@ source $ZSH/oh-my-zsh.sh
 if [ -f ~/.me/rc ]; then
     . ~/.me/rc
 fi
+
+autoload -U +X bashcompinit && bashcompinit

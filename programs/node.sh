@@ -1,4 +1,5 @@
 INSTALL=$1
+SHELL_NAME="$(basename "$SHELL")"
 
 # install via asdf
 if type "asdf" > /dev/null; then
@@ -13,11 +14,14 @@ if type "asdf" > /dev/null; then
 # install via homebrew & nvm
 else
   [ -n "$INSTALL" ] && brew install "nvm"
+  INSTALL_DIR="$(brew --prefix nvm)"
 
-  export NVM_DIR="$HOME/.nvm"
-  export PATH="./node_modules/.bin:$PATH" # for quick access to node packages
-  source "$(brew --prefix nvm)/nvm.sh"
-  source "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
+  if [ -f "$INSTALL_DIR" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    export PATH="./node_modules/.bin:$PATH" # for quick access to node packages
+    source "$INSTALL_DIR/nvm.sh"
+    source "$INSTALL_DIR/etc/bash_completion.d/nvm"
+  fi
 
   [ -n "$INSTALL" ] && nvm install node --lts
 fi
