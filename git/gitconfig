@@ -58,8 +58,6 @@
 	autosetupmerge = always
 	autosetuprebase = always
 [branch "master"]
-    remote = origin
-    merge = refs/heads/master
     mergeoptions = --ff-only
 [commit]
 	template = /Users/emil/.stCommitMsg
