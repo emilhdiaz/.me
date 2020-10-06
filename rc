@@ -12,12 +12,16 @@ fi
 
 # ======== Aliases ========
 
+source ~/.me/bash_aliases
+
+# ======== Functions ========
+
 # You may want to put all your additions into separate files
 # in a separate file, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -d ~/.me/bash_aliases ]; then
-    for f in ~/.me/bash_aliases/*; do
+if [ -d ~/.me/include ]; then
+    for f in ~/.me/include/*; do
         source $f;
     done
 fi
@@ -51,7 +55,15 @@ export PATH=$PATH
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -d ~/.me/programs ]; then
-    for f in ~/.me/programs/*; do
+    for f in ~/.me/programs/homebrew/*-configure.sh; do
+        source $f;
+    done
+
+    for f in ~/.me/programs/asdf/*-configure.sh; do
+        source $f;
+    done
+
+    for f in ~/.me/programs/native-vm/*-configure.sh; do
         source $f;
     done
 fi

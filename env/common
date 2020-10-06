@@ -1,6 +1,8 @@
 export CLICOLOR=1
+export LOGLEVEL=INFO
 export LSCOLORS=ExFxBxDxCxegedabagacad
 export AWS_SDK_LOAD_CONFIG=1
+export CLOUDSDK_PYTHON=python
 export EDITOR="/usr/bin/vi"
 export PROJECT_DIR="$HOME/Projects"
 export DOCKER_HOST=unix:///var/run/docker.sock #localhost:2375
