@@ -12,7 +12,7 @@ fi
 
 # ======== Aliases ========
 
-source ~/.me/bash_aliases
+source ~/.me/shell/bash_aliases
 
 # ======== Functions ========
 
@@ -46,6 +46,11 @@ if [ -d "/usr/local/sbin" ] ; then
     PATH="/usr/local/sbin:$PATH"
 fi
 
+# set PATH so it includes /.module/adt bin if it exists
+if [ -d "$HOME/.me/.modules/adt" ] ; then
+    PATH="$HOME/.me/.modules/adt:$PATH"
+fi
+
 export PATH=$PATH
 
 # ======== Init Programs ========
@@ -54,18 +59,18 @@ export PATH=$PATH
 # in a separate file, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -d ~/.me/programs ]; then
-    for f in ~/.me/programs/homebrew/*-configure.sh; do
-        source $f;
-    done
-
-    for f in ~/.me/programs/asdf/*-configure.sh; do
-        source $f;
-    done
-
-    for f in ~/.me/programs/native-vm/*-configure.sh; do
+if [ -d ~/.me/shell/lib ]; then
+    for f in ~/.me/shell/lib/*; do
         source $f;
     done
 fi
 
+if [ -d ~/.me/.modules/adt/programs ]; then
+    for f in ~/.me/.modules/adt/programs/homebrew/*-configure.sh; do
+        source $f;
+    done
 
+    for f in ~/.me/.modules/adt/programs/asdf/*-configure.sh; do
+        source $f;
+    done
+fi

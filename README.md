@@ -6,20 +6,16 @@ automatically setup your MacOSX developer environment and to standardize
 that setup across machines. 
 
 ## /env
-This directory contains environment variables that should be set on each 
-launch of a new shell, regardless if it's a login shell or not. 
+This directory contains environment variables that should always be set 
+on your shell. 
 
 ## /git
 This directory contains common global `git` configuration that should be 
 applied across all your `git` projects. 
 
-## /includes
-This directory contains a collection of functions that 
-assist with common CLI tasks. 
-
-## /programs
-This directory contains a collection of installation and configuration 
-scripts for a number of common CLI developer tools
+## /shell
+This directory contains shell initiation configuration as well as a 
+collection of commonly used shell functions.  
 
 ## How to install? 
 

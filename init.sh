@@ -1,10 +1,16 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-cd $HOME;
-ln -s $HOME/.me/profile $HOME/.profile;
-ln -s $HOME/.me/bashrc $HOME/.bashrc;
-ln -s $HOME/.me/zshrc $HOME/.zshrc;
-ln -s $HOME/.me/rc $HOME/.rc;
+SHELL_NAME="$(basename "$SHELL")"
 
-ln -s $HOME/.me/git/gitconfig $HOME/.gitconfig;
-ln -s $HOME/.me/git/gitignore_global $HOME/.gitignore_global;
+(
+  cd "$HOME" && \
+  ln -sf "$HOME/.me/shell/profile" "$HOME/.profile";
+  ln -sf "$HOME/.me/shell/bashrc" "$HOME/.bashrc";
+  ln -sf "$HOME/.me/shell/zshrc" "$HOME/.zshrc";
+  ln -sf "$HOME/.me/git/gitconfig" "$HOME/.gitconfig";
+  ln -sf "$HOME/.me/git/gitignore_global" "$HOME/.gitignore_global";
+)
+
+source "$HOME/.${SHELL_NAME}rc"
+
+adt install --config adt-config.yml

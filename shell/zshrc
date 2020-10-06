@@ -96,8 +96,8 @@ source $ZSH/oh-my-zsh.sh
 # in a separate file, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.me/rc ]; then
-    . ~/.me/rc
+if [ -f ~/.me/shell/rc ]; then
+    . ~/.me/shell/rc
 fi
 
 autoload -U +X bashcompinit && bashcompinit
