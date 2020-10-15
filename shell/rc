@@ -46,10 +46,6 @@ if [ -d "/usr/local/sbin" ] ; then
     PATH="/usr/local/sbin:$PATH"
 fi
 
-# set PATH so it includes /.module/adt bin if it exists
-if [ -d "$HOME/.me/.modules/adt" ] ; then
-    PATH="$HOME/.me/.modules/adt:$PATH"
-fi
 
 export PATH=$PATH
 
@@ -65,12 +61,12 @@ if [ -d ~/.me/shell/lib ]; then
     done
 fi
 
-if [ -d ~/.me/.modules/adt/programs ]; then
-    for f in ~/.me/.modules/adt/programs/homebrew/*-configure.sh; do
+if [ -d "$(brew --prefix vulcan)"/libexec/packages ]; then
+    for f in "$(brew --prefix vulcan)"/libexec/packages/brew/*-configure.sh; do
         source $f;
     done
 
-    for f in ~/.me/.modules/adt/programs/asdf/*-configure.sh; do
+    for f in "$(brew --prefix vulcan)"/libexec/packages/asdf/*-configure.sh; do
         source $f;
     done
 fi

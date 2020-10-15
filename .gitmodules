@@ -1,4 +1,0 @@
-[submodule ".modules/adt"]
-	path = .modules/adt
-	url = git@gitlab.com:abacusinsights/common-utils/abacus-dev-tools.git
-	branch = dev-tools
