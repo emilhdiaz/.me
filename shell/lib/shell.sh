@@ -17,3 +17,12 @@ DOC
   set -eu
   return 0
 }
+
+print_path() {
+  IFS=':' read -rA PATH_ARRAY <<< "$PATH"
+
+  for i in "${PATH_ARRAY[@]}"
+  do
+    echo $i
+  done
+}
