@@ -1,75 +1,65 @@
-programs:
-  - name: zsh
-    installer: homebrew
-  - name: git
-    installer: homebrew
-  - name: dos2unix
-    installer: homebrew
-  - name: jq
-    installer: homebrew
-  - name: yq
-    installer: homebrew
-  - name: unzip
-    installer: homebrew
-  - name: coreutils
-    installer: homebrew
-  - name: gpg
-    installer: homebrew
-  - name: bison
-    installer: homebrew
-  - name: gnu-tar
-    installer: homebrew
-  - name: zlib
-    installer: homebrew
-  - name: curl
-    installer: homebrew
-  - name: awscli
-    installer: homebrew
-  - name: tfenv
-    installer: homebrew
-  - name: pyenv
-    installer: homebrew
-  - name: pyenv-virtualenv
-    installer: homebrew
-  - name: nvm
-    installer: homebrew
+installers:
   - name: asdf
-    installer: homebrew
+  - name: nvm
+  - name: pyenv
+  - name: pipx
+  - name: sdk
+  - name: tfenv
+
+packages:
+  - name: zsh
+  - name: git
+  - name: dos2unix
+  - name: jq
+  - name: yq
+  - name: unzip
+  - name: coreutils
   - name: direnv
-    installer: asdf
+  - name: curl
+  - name: awscli
+  - name: gpg
+  - name: bison
+  - name: gnu-tar	
+  - name: zlib
+  - name: poetry
+    installer: pipx
+    version: 1.1.7
+  - name: aws-sso-credential-process
+    installer: pipx
   - name: gcloud
     installer: asdf
   - name: helm
     installer: asdf
     version: 3.3.4
-  - name: helmsman
-    installer: asdf
-    version: 3.4.4
   - name: kubectl
     installer: asdf
-    version: 1.19.2
-  - name: nodejs
-    installer: asdf
-    version: 14.13.0
+    version: 1.21.1
   - name: packer
     installer: asdf
     version: 1.6.4
-  - name: python
-    installer: asdf
-    version: 3.8.5
-  - name: ruby
-    installer: asdf
-    version: 2.7.1
   - name: terraform
-    installer: asdf
-    version: 0.12.29
-  - name: golang
-    installer: asdf
-    version: 1.15.2
-  - name: poetry
-    installer: asdf
-  - name: serverless
-    installer: npm
-    version: 2.4.0
+    installer: tfenv
+    version: 0.12.31
+  - name: nodejs
+    installer: nvm
+    version: 14.13.0
+  - name: python
+    installer: pyenv
+    version: 3.7.10
+
+#  - name: helmsman
+#    installer: asdf
+#    version: 3.4.4
+#    repository: helmsman
+#    repository-url: https://github.com/jkrukoff-cb/asdf-helmsman.git
+#  - name: ruby
+#    installer: asdf
+#    version: 2.7.1
+#  - name: golang
+#    installer: asdf
+#    version: 1.15.2
+#  - name: serverless
+#    installer: npm
+#    version: 2.4.0
 #  - name: java
 #    installer: asdf
