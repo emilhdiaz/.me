@@ -61,3 +61,5 @@
     mergeoptions = --ff-only
 [commit]
 	template = /Users/emil/.stCommitMsg
+[init]
+	templateDir = /Users/emil/.git-template
